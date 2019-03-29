@@ -16,7 +16,7 @@ metadata:
   labels:
     source: demo
     stack: frontend
-    app: spinnaker
+    app: test
   annotations:
     strategy.spinnaker.io/max-version-history: '2'
     traffic.spinnaker.io/load-balancers: '["service spinnaker-demo"]'
@@ -25,7 +25,7 @@ spec:
   selector:
     matchLabels:
       source: demo
-      app: spinnaker
+      app: test
   template:
     metadata:
       labels:
@@ -55,7 +55,7 @@ metadata:
 spec:
   selector:
     source: demo
-    app: spinnaker
+    app: test
   type: NodePort
   ports:
   - protocol: TCP
