@@ -14,9 +14,7 @@ metadata:
   name: spinnaker-demo
   namespace: default
   labels:
-    source: demo
-    stack: frontend
-    app: test
+    tier: frontend
   annotations:
     strategy.spinnaker.io/max-version-history: '2'
     traffic.spinnaker.io/load-balancers: '["service spinnaker-demo"]'
@@ -24,13 +22,11 @@ spec:
   replicas: 3
   selector:
     matchLabels:
-      source: demo
-      app: test
+      tier: frontend
   template:
     metadata:
       labels:
-        source: demo
-        app: test
+        tier: frontend
     spec:
       containers:
       - name: primary
@@ -54,7 +50,6 @@ metadata:
   namespace: default
 spec:
   selector:
-    source: demo
     app: test
   type: NodePort
   ports:
