@@ -30,7 +30,7 @@ spec:
     metadata:
       labels:
         source: demo
-        app: spinnaker
+        app: test
     spec:
       containers:
       - name: primary
