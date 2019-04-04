@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: spinnaker-demo-config
-  namespace: default
+  name: hello-word-config
+  namespace: core
 data:
   NEW_FEATURE: "true"
 
@@ -11,13 +11,14 @@ data:
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: spinnaker-demo
-  namespace: default
+  name: hello-world
+  namespace: core
   labels:
     tier: frontend
   annotations:
+    moniker.spinnaker.io/application: hello-world
     strategy.spinnaker.io/max-version-history: '2'
-    traffic.spinnaker.io/load-balancers: '["service spinnaker-demo"]'
+    traffic.spinnaker.io/load-balancers: '["service hello-world"]'
 spec:
   replicas: 3
   selector:
@@ -39,15 +40,17 @@ spec:
             port: 8000
         envFrom:
         - configMapRef:
-            name: spinnaker-demo-config
+            name: hello-world-config
 
 ---
 
 kind: Service
 apiVersion: v1
 metadata:
-  name: spinnaker-demo
-  namespace: default
+  name: hello-world
+  namespace: core
+  annotations:
+    moniker.spinnaker.io/application: hello-world
 spec:
   selector:
     app: test
